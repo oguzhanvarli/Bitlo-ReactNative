@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -13,7 +13,9 @@ import { signin } from "../../network/store/authSlice";
 
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required!"),
+  email: Yup.string().
+  email("Invalid email").
+  required("Required!"),
   password: Yup.string()
     .min(6, "Too Short!")
     .max(10, "Too Long!")

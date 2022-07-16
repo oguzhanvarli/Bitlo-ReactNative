@@ -1,9 +1,11 @@
-import { SafeAreaView, StyleSheet, Text, View, ScrollView} from "react-native";
+import { SafeAreaView, Text, View, ScrollView} from "react-native";
 import React, { useEffect, useState } from "react";
 import { baseService } from "../../network/services/baseService";
 import { DataTable } from "react-native-paper";
 import styles from "./MarketDetail.style";
 import { ActivityIndicator} from 'react-native-paper';
+import BackButton from "../../components/backButton/BackButton";
+//import { io } from "socket.io-client";
 
 export default function MarketDetail(prop) {
   const marketCode = prop.route.params.marketCode;
@@ -11,14 +13,12 @@ export default function MarketDetail(prop) {
   const [asks, setAsks] = useState([]);
   const [loading, setloading] = useState(true)
   useEffect(() => {
-    let isActive = true;
-    if (isActive) {
       getData();
-    }
+      //useSocket();
   }, []);
 
+  let url = `https://api4.bitlo.com/market/orderbook?market=${marketCode}&depth=50`;
   const getData = async () => {
-    let url = `https://api4.bitlo.com/market/orderbook?market=${marketCode}&depth=50`;
     try {
       const data = await baseService.get(url);
       setBids(data.bids);
@@ -29,6 +29,28 @@ export default function MarketDetail(prop) {
       setloading(false)
     }
   };
+
+  //trying to use socket but not work with that url
+
+  // const useSocket = () => {
+  //   try {
+  //     const socket = io(url)
+  //     socket.on('connect', () => {
+  //       setBids(socket.bids);
+  //       setAsks(socket.asks);
+  //       setloading(false)
+  //     })
+  //   } catch (error) {
+  //     console.log(error)
+  //     setloading(false)
+  //   }
+  // }
+ 
+  const goBack = () => {
+    prop.navigation.goBack()
+  }
+
+  //Adjusting background color for ask and bids, according to Total
   const handleBackground = (value) => {
     let percent  = '';
     if(value / 100 < 10){
@@ -50,8 +72,10 @@ export default function MarketDetail(prop) {
   }
   return (
     <SafeAreaView style={{flex:1}}>
-        {loading ? <ActivityIndicator style={styles.indicator} animating={loading} color='blue' size='large'/> : 
-      <ScrollView>
+        {loading ? <ActivityIndicator style={styles.indicator} animating={loading} color='blue' size='large'/> :
+        <View>
+        <BackButton onPress={goBack}/> 
+      <ScrollView >
       <DataTable style={styles.tableContainer} >
         <DataTable.Header >
           <DataTable.Title textStyle={styles.header} numeric >Toplam(TRY)</DataTable.Title>
@@ -82,8 +106,8 @@ export default function MarketDetail(prop) {
         </DataTable.Row>
         ))}
       </DataTable>
-      </ScrollView>}
+      </ScrollView>
+      </View>}
     </SafeAreaView>
   );
 }
-//t@test.com

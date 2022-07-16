@@ -1,14 +1,18 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
+  container:{
+    flex:1,
+    backgroundColor: '#fff'
+  },
+  secondContainer: {
+    flex:1,
+    justifyContent : 'center',
     backgroundColor: "#fff",
-    paddingTop : 50,
     alignItems: "center",
     justifyContent: "center",
   },
-  secondContainer: {
+  thirdContainer: {
     flexDirection : 'row',
     marginBottom: 20,
   },

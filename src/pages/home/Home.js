@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Animated } from "react-native";
+import { SafeAreaView, Text, View, Animated } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { baseService } from "../../network/services/baseService";
 import { FlatList } from "react-native";
@@ -12,7 +12,7 @@ export default function Home({ navigation }) {
   const [mainData, setMainData] = useState([]);
   const [refreshedData, setRefreshData] = useState([]);
   const [loading, setloading] = useState(true);
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current; //for brand animation
   useEffect(() => {
     getData();
     fadeIn();
@@ -39,6 +39,7 @@ export default function Home({ navigation }) {
   const goToProfile = () => {
     navigation.navigate("Profile");
   };
+  //Brand animation
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,

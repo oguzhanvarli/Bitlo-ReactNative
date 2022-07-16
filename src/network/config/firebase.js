@@ -1,4 +1,4 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,7 +8,6 @@ import {
 } from 'firebase/auth/react-native';
 
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyD6_OW0lou3TMtpNoGv1jTOn8lJ5OIQx5k",
   authDomain: "native-auth-67897.firebaseapp.com",

@@ -11,14 +11,15 @@ export default StyleSheet.create({
         marginBottom : 20,
     },
     fadingContainer: {
-        backgroundColor: "#0A0094"
+        backgroundColor: "#0A0094",
+        borderRadius : 20,
       },
     brandName:{
         fontSize : 26,
         marginLeft : 20,
         marginRight : 20,
         color: 'white',
-        fontSize : 35
+        fontSize : 35,
     },
     search:{
         width: 200,
